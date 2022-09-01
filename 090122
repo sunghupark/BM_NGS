@@ -1,18 +1,36 @@
+##login
+sunghupark@Sunghuui-MacBookPro ~ % ssh bm@143.248.15.5 -p 2117
+
+
 ## STAR의 workflow 1 generating genome indexes files 2 mapping reads to the genome
 
-# 1 generating genome indexes files
+# 1 generating genome indexes files.
 
 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/STAR-2.7.5a/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir genomeindex_hg38 --sjdbGTFfile ./gencode.v41.annotation.gtf --sjdbOverhang  99 --runThreadN 8 --genomeFastaFiles /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/ref_fasta/hg38.fa
 
+# 2 mapping reads to the genome.
 
-
-
-
-
-
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/STAR-2.7.5a/bin/Linux_x86_64/STAR --runThreadN 8 --genomeDir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/genomeindex_hg38 --readFilesCommand zcat --readFilesIn /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/FK1-rep1_1.fastq.gz /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/FK1-rep1_2.fastq.gz --outFileNamePrefix 083122_psh_mapping
 
 ## sam into bam by samtools
 
 #pairend
+#vertical line은 pipeline을 쓰는데 필요함.
+#-b : output을 BAM으로 함.
+#-q 10 : mapq가 10보다 작은 alignment는 무시
+#-f 2 : output은 flag의 bit가 2를 가지고 있는 애들만 -> 이말은 aligner에 properly according된애들만하겠다는말.
+#- : pipeline을 쓸 때 앞의 파일을 그대로 받겠다는 의미.
+#; : pipeline을 끝내겠다.
 
-samtools view -Sb 083122_psh_mappingAligned.out.sam > 
+samtools view -Sb 083122_psh_mappingAligned.in.sam | samtools view -b -q 10 -f 2 - | samtools sort - 083122_psh_mappingAligned.out.bam; 
+
+#singleend
+
+samtools view -Sb [input dir] | samtools view -b -q 10 - | samtools sort - [output dir]; 
+
+## read quantification(featurecount)
+# -Q 10 : 애초에 q10으로 걸렀으므로 q 5해도 결과는 달라지지 않음
+# -s 1 vs -s 2 : 우리가 형성한 library가 straded 인지 reversely stranded인지에 의해 이미 결정되어진다. 우리의 경우 2. 1을 하면 unassigned_nofeatures가 엄청 높게 나옴.
+#
+#
+(base) bm@BM:/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120$ /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/subread-2.0.1-Linux-x86_64/bin/featureCounts -Q 10 -T 8 -p -s 2 -a /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/gencode.v41.annotation.gtf -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/083122_psh_subreadoutput.txt /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/083122_psh_mappingAligned.out.sam
