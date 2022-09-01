@@ -1,0 +1,18 @@
+## STAR의 workflow 1 generating genome indexes files 2 mapping reads to the genome
+
+# 1 generating genome indexes files
+
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/STAR-2.7.5a/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir genomeindex_hg38 --sjdbGTFfile ./gencode.v41.annotation.gtf --sjdbOverhang  99 --runThreadN 8 --genomeFastaFiles /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/ref_fasta/hg38.fa
+
+
+
+
+
+
+
+
+## sam into bam by samtools
+
+#pairend
+
+samtools view -Sb 083122_psh_mappingAligned.out.sam > 
