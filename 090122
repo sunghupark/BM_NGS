@@ -1,10 +1,33 @@
 ##login
 sunghupark@Sunghuui-MacBookPro ~ % ssh bm@143.248.15.5 -p 2117
 
+##screen 관련 단축키들.
+#일단 가상 스크린을 띄우는 거는
+#sunghupark@Sunghuui-MacBookPro ~ % screen -list
+#There are screens on:
+#	32858.ttys001.Sunghuui-MacBookPro	(Detached)
+#	20455.ttys002.Sunghuui-MacBookPro	(Attached)
+#이렇게 두개를 띄우는 거지, bm ssh에서 두개를 띄우는게 아니다.
+# bm에서는 하나만 띄우면, 32858에서 열심히 일하고 있는 듯 하다.
+# 32858로 진입했다가 control + a -> d를 누르면 자동으로 20455로 빠져나오는 것 같다.
+# control d 와 exit를 치면 screen을 아예 종료 시켜버리는 거고, control a+d는 screen에서 탈출해서 다른 스크린으로 진입하는 것을 의미하는 듯
+# 정리하면 1 제일 먼저 아예 새로운 페이지를 판다음에, screen -S로 새로운 screen을 만들어준다. 2 기존의 screen에서는 일을 시킨다 3 control a d로 탈출한다(그러면 새로만든 스크린에 진입해 있을 것임) 4 다시 들어가려면 screen -r 스크린 명
+#screen -r [세션이름] : 실행중인(Detached) screen 세션으로 재 진입시 실행하는 명령어, screen세션이 하나만 실행중일 경우 세션이름을 입력하지 않아도 진입이 된다.
+#screen -x [세션이름] : 실행중인(Attached) screen 세션으로 재 진입시 실행하는 명령어, screen세션이 하나만 실행중일 경우 세션이름을 입력하지 않아도 진입이 된다.
+#...ㄱㄹㅎㄷ
+# attached는 일하고 있음 + 켜져 있음? vs detached는 일하고 있는데 누가 켜놓고 나왔음이라는 뜻이라고 한다.
 
 ## STAR의 workflow 1 generating genome indexes files 2 mapping reads to the genome
 
-# 1 generating genome indexes files.
+# 1 generating genome indexes files : 할필요 x 간단이해) 휴먼레퍼런스 genome fastq 파일 + GTF(gencode가 제공하는 유전자 위치 정보)
+- 이미 만들어 놨다... psh/hg38에...
+- 1 STAR의 위치
+- --runMode genomeGenerate : star를 index file을 만드는 모드로 진입시킴.
+- --genomeDir genomeindex_090222 : 이 디렉토리(따라서 이 명령어는 psh에서 이루어져야)에 index file을 저장하겠다.
+- --sjdbGTFfile ./gencode.v41.annotation.gtf : GTF(GENCODE가 제공하는 유전자 위치 정보)을 이용하게 넣어줌. 형민 형이 psh에 넣어놓음.
+- --sjdbOverhang 99 : 우리의 readlength는 100이므로 -1인 99fmf sjgdjwna.
+- --runThreadN 8 : CPU thread 
+- --genomeFastaFiles hg38.fa
 
 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/STAR-2.7.5a/bin/Linux_x86_64/STAR --runMode genomeGenerate --genomeDir genomeindex_hg38 --sjdbGTFfile ./gencode.v41.annotation.gtf --sjdbOverhang  99 --runThreadN 8 --genomeFastaFiles /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/ref_fasta/hg38.fa
 
@@ -12,17 +35,34 @@ sunghupark@Sunghuui-MacBookPro ~ % ssh bm@143.248.15.5 -p 2117
 
 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/STAR-2.7.5a/bin/Linux_x86_64/STAR --runThreadN 8 --genomeDir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/genomeindex_hg38 --readFilesCommand zcat --readFilesIn /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/FK1-rep1_1.fastq.gz /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/FK1-rep1_2.fastq.gz --outFileNamePrefix 083122_psh_mapping
 
+090222##/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/STAR-2.7.5a/bin/Linux_x86_64/STAR --runThreadN 12 --genomeDir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/genomeindex_hg38 --readFilesCommand zcat --readFilesIn /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/FK1-rep1_1.fastq.gz /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/FK1-rep1_2.fastq.gz --outFileNamePrefix 090222_FK1-rep1_psh_mapping;\
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/STAR-2.7.5a/bin/Linux_x86_64/STAR --runThreadN 12 --genomeDir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/genomeindex_hg38 --readFilesCommand zcat --readFilesIn /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/FK1-rep2_1.fastq.gz /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/FK1-rep2_2.fastq.gz --outFileNamePrefix 090222_FK1-rep2_psh_mapping;\
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/STAR-2.7.5a/bin/Linux_x86_64/STAR --runThreadN 12 --genomeDir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/genomeindex_hg38 --readFilesCommand zcat --readFilesIn /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/FK2-rep1_1.fastq.gz /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/FK2-rep1_2.fastq.gz --outFileNamePrefix 090222_FK2-rep1_psh_mapping;\
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/STAR-2.7.5a/bin/Linux_x86_64/STAR --runThreadN 12 --genomeDir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/genomeindex_hg38 --readFilesCommand zcat --readFilesIn /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/FK2-rep2_1.fastq.gz /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/FK2-rep2_2.fastq.gz --outFileNamePrefix 090222_FK2-rep2_psh_mapping;\
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/STAR-2.7.5a/bin/Linux_x86_64/STAR --runThreadN 12 --genomeDir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/genomeindex_hg38 --readFilesCommand zcat --readFilesIn /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/FKD-rep1_1.fastq.gz /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/FKD-rep1_2.fastq.gz --outFileNamePrefix 090222_FKD-rep1_psh_mapping;\
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/STAR-2.7.5a/bin/Linux_x86_64/STAR --runThreadN 12 --genomeDir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/genomeindex_hg38 --readFilesCommand zcat --readFilesIn /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/FKD-rep2_1.fastq.gz /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/FKD-rep2_2.fastq.gz --outFileNamePrefix 090222_FKD-rep2_psh_mapping;\
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/STAR-2.7.5a/bin/Linux_x86_64/STAR --runThreadN 12 --genomeDir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/genomeindex_hg38 --readFilesCommand zcat --readFilesIn /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/MLL2-rep1_1.fastq.gz /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/MLL2-rep1_2.fastq.gz --outFileNamePrefix 090222_MLL2-rep1_psh_mapping;\
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/STAR-2.7.5a/bin/Linux_x86_64/STAR --runThreadN 12 --genomeDir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/genomeindex_hg38 --readFilesCommand zcat --readFilesIn /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/MLL2-rep2_1.fastq.gz /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/MLL2-rep2_2.fastq.gz --outFileNamePrefix 090222_MLL2-rep2_psh_mapping;\
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/STAR-2.7.5a/bin/Linux_x86_64/STAR --runThreadN 12 --genomeDir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/genomeindex_hg38 --readFilesCommand zcat --readFilesIn /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/WT-HL-rep1_1.fastq.gz /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/WT-HL-rep1_2.fastq.gz --outFileNamePrefix 090222_WT-HL-rep1_psh_mapping;\ 
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/STAR-2.7.5a/bin/Linux_x86_64/STAR --runThreadN 12 --genomeDir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/genomeindex_hg38 --readFilesCommand zcat --readFilesIn /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/WT-HL-rep2_1.fastq.gz /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/KHM/project_2022/082222_KHM_HeLaS3_KO/rawdata/WT-HL-rep2_2.fastq.gz --outFileNamePrefix 090222_WT-HL-rep2_psh_mapping;\
+##083122_psh_mapping이라고 맨마지막(prefix)를 설정해주면 output파일은 아라서 083122_psh_mappingAligned.sam으로 나오는 듯 하다.
+
 ## sam into bam by samtools
 
 #pairend
+# [bam_header_read] EOF marker is absent. The input is probably truncated.
+# [bam_header_read] EOF marker is absent. The input is probably truncated.
+# [samopen] SAM header is present: 455 sequences.
+# 라고 뜨는데 기다리니까 되었던 것 같다... 형민이형이 오류 아니라고 함.
 #vertical line은 pipeline을 쓰는데 필요함.
 #-b : output을 BAM으로 함.
 #-q 10 : mapq가 10보다 작은 alignment는 무시
 #-f 2 : output은 flag의 bit가 2를 가지고 있는 애들만 -> 이말은 aligner에 properly according된애들만하겠다는말.
 #- : pipeline을 쓸 때 앞의 파일을 그대로 받겠다는 의미.
 #; : pipeline을 끝내겠다.
+#끝에 bam을 달아줘야하는 줄 알았는데, 아니다. bam을 써버리면 bam.bam으로 떠버린닷
 
-samtools view -Sb 083122_psh_mappingAligned.in.sam | samtools view -b -q 10 -f 2 - | samtools sort - 083122_psh_mappingAligned.out.bam; 
+samtools view -Sb 083122_psh_mappingAligned.out.sam | samtools view -b -q 10 -f 2 - | samtools sort - 083122_psh_mappingAligned.out; 
 
 #singleend
 
