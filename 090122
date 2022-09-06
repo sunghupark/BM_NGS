@@ -74,3 +74,18 @@ samtools view -Sb [input dir] | samtools view -b -q 10 - | samtools sort - [outp
 #
 #
 (base) bm@BM:/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120$ /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/subread-2.0.1-Linux-x86_64/bin/featureCounts -Q 10 -T 8 -p -s 2 -a /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/gencode.v41.annotation.gtf -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/083122_psh_subreadoutput.txt /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/083122_psh_mappingAligned.out.sam
+
+## data를 ssh에서 local로 불러오기
+# 비밀번호를 요구해서 10번 차례로 함.
+ scp -P 2117 bm@143.248.15.5:/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/090222_FK1-rep1_psh_subreadoutput.txt /Users/sunghupark/090222_NGS;
+  scp -P 2117 bm@143.248.15.5:/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/090222_FK1-rep2_psh_subreadoutput.txt /Users/sunghupark/090222_NGS;
+   scp -P 2117 bm@143.248.15.5:/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/090222_FK2-rep1_psh_subreadoutput.txt /Users/sunghupark/090222_NGS;
+    scp -P 2117 bm@143.248.15.5:/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/090222_FK2-rep2_psh_subreadoutput.txt /Users/sunghupark/090222_NGS;
+     scp -P 2117 bm@143.248.15.5:/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/090222_FKD-rep1_psh_subreadoutput.txt /Users/sunghupark/090222_NGS;
+      scp -P 2117 bm@143.248.15.5:/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/090222_FKD-rep2_psh_subreadoutput.txt /Users/sunghupark/090222_NGS;
+       scp -P 2117 bm@143.248.15.5:/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/090222_MLL2-rep1_psh_subreadoutput.txt /Users/sunghupark/090222_NGS;
+        scp -P 2117 bm@143.248.15.5:/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/090222_MLL2-rep2_psh_subreadoutput.txt /Users/sunghupark/090222_NGS;
+         scp -P 2117 bm@143.248.15.5:/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/090222_WT-HL-rep1_psh_subreadoutput.txt /Users/sunghupark/090222_NGS;
+          scp -P 2117 bm@143.248.15.5:/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/psh/090222_WT-HL-rep2_psh_subreadoutput.txt /Users/sunghupark/090222_NGS;
+       
+# R에서...
