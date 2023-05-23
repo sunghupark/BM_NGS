@@ -11,13 +11,47 @@
 
 ###[bowtie2]아무 디렉토리에서.
 bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/Drosha_ChIP-seq.SRR5017445_trimmed.fq.gz -S Drosha_ChIP-seq.SRR5017445_trimmed.sam ; 
-bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/Drosha_Input_ChIP-seq.SRR5017448_trimmed.fq.gz -S Drosha_ChIP-seq.SRR5017448_trimmed.sam ; 
+bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/Drosha_Input_ChIP-seq.SRR5017448_trimmed.fq.gz -S Drosha_Input_ChIP-seq.SRR5017448_trimmed.sam ; 
 bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/MLL2_ChIP-seq.SRR941117_trimmed.fq.gz -S MLL2_ChIP-seq.SRR941117_trimmed.sam ; 
-bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/MLL2_ChIP-seq.SRR941118_trimmed.fq.gz -S MLL2_ChIP-seq.SRR941118_trimmed.fq.sam ; 
-bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/MLL2_ChIP-seq.SRR941119_trimmed.fq.gz -S MLL2_ChIP-seq.SRR941119_trimmed.fq.sam ;
+bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/MLL2_ChIP-seq.SRR941118_trimmed.fq.gz -S MLL2_ChIP-seq.SRR941118_trimmed.sam ; 
+bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/MLL2_ChIP-seq.SRR941119_trimmed.fq.gz -S MLL2_ChIP-seq.SRR941119_trimmed.sam ;
 bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/MLL2_Input_ChIP-seq.SRR941120_trimmed.fq.gz -S MLL2_Input_ChIP-seq.SRR941120_trimmed.sam ; 
 bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/MLL2_Input_ChIP-seq.SRR941121_trimmed.fq.gz -S MLL2_Input_ChIP-seq.SRR941121_trimmed.sam ; 
 bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/MLL2_Input_ChIP-seq.SRR941122_trimmed.fq.gz -S MLL2_Input_ChIP-seq.SRR941122_trimmed.sam
+
+###[samtools view]
+samtools view -@ 2 -S -bh -q 10 -F 1804 - Drosha_ChIP-seq.SRR5017445_trimmed.sam Drosha_ChIP-seq.SRR5017445_trimmed.bam ;
+samtools view -@ 2 -S -bh -q 10 -F 1804 - Drosha_Input_ChIP-seq.SRR5017448_trimmed.sam Drosha_Input_ChIP-seq.SRR5017448_trimmed.bam ;
+samtools view -@ 2 -S -bh -q 10 -F 1804 - MLL2_ChIP-seq.SRR941117_trimmed.sam MLL2_ChIP-seq.SRR941117_trimmed.bam ;
+samtools view -@ 2 -S -bh -q 10 -F 1804 - MLL2_ChIP-seq.SRR941118_trimmed.sam MLL2_ChIP-seq.SRR941118_trimmed.bam ;
+samtools view -@ 2 -S -bh -q 10 -F 1804 - MLL2_ChIP-seq.SRR941119_trimmed.sam MLL2_ChIP-seq.SRR941119_trimmed.bam ;
+samtools view -@ 2 -S -bh -q 10 -F 1804 - MLL2_Input_ChIP-seq.SRR941120_trimmed.sam MLL2_Input_ChIP-seq.SRR941120_trimmed.bam ;
+samtools view -@ 2 -S -bh -q 10 -F 1804 - MLL2_Input_ChIP-seq.SRR941121_trimmed.sam MLL2_Input_ChIP-seq.SRR941121_trimmed.bam ;
+samtools view -@ 2 -S -bh -q 10 -F 1804 - MLL2_Input_ChIP-seq.SRR941122_trimmed.sam MLL2_Input_ChIP-seq.SRR941122_trimmed.bam
+
+###[samtools sort]
+samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/Drosha_ChIP-seq.SRR5017445_trimmed.bam ;
+samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/Drosha_Input_ChIP-seq.SRR5017448_trimmed.bam ;
+samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/MLL2_ChIP-seq.SRR941117_trimmed.bam ;
+samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/MLL2_ChIP-seq.SRR941118_trimmed.bam ;
+samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/MLL2_ChIP-seq.SRR941119_trimmed.bam ;
+samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/MLL2_Input_ChIP-seq.SRR941120_trimmed.bam ;
+samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/MLL2_Input_ChIP-seq.SRR941121_trimmed.bam ;
+samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/MLL2_Input_ChIP-seq.SRR941122_trimmed.bam
+
+###[picard]
+java -jar /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/picard.jar MarkDuplicates I=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/test.sorted.bam O=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/test.sorted_duprm.bam M=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/test.sorted_marked_dup_metrics.txt
+samtools view -h -@ 2 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/test.sorted_duprm.bam | egrep -v chrM | samtools view -bh -@ 2 - | bedtools intersect -abam stdin -b /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/mm9-blacklist.bed.gz -v > /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/test.sorted.duprm_rmChrM_rmBlack.bam
+rm /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/test.sorted_duprm.bam
+
+
+
+
+
+
+
+
+
 
 
 
