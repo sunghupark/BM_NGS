@@ -9,7 +9,7 @@ bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/
 
 ###samtools 실행 예시
 samtools view -@ 2 -S -bh -q 10 -F 1804 - test.sam test.bam
-samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/test_sort.bam
+samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/test_sort.bam -> 바로 뒤에 input 파일 목적어로 넣어주면 되는 듯.
 
 ###picard 실행 예시
 java -jar /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/picard.jar MarkDuplicates I=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/test.sorted.bam O=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/test.sorted_duprm.bam M=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/test.sorted_marked_dup_metrics.txt
@@ -20,4 +20,5 @@ rm /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/
 #형민 형
 macs3 callpeak -t M2_r1_SE76nt_trimmed.bam_duprm_rmChrM_rmBlack.bam M2_r2_SE76nt_trimmed.bam_duprm_rmChrM_rmBlack.bam -c FK1_M2_in_SE76nt_trimmed.bam_duprm_rmChrM_rmBlack.bam -f BAM -g hs -n MLL2 -B -q 0.05;
 #내 코드
-macs3 callpeak -t ### -c ### -f BAM -g mm -n MLL2 -B -q 0.05;
+macs3 callpeak -t /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/Drosha_ChIP_Seq.SRR5017445_trimmed_sorted_duprm_rmChrM_rmBlack.bam -c /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/Drosha_Input_ChIP_Seq.SRR5017448_trimmed_sorted_duprm_rmChrM_rmBlack.bam -f BAM -g mm -n DROSHA -B -q 0.05;
+macs3 callpeak -t /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/MLL2_ChIP_Seq.SRR941117_trimmed_sorted_duprm_rmChrM_rmBlack.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/MLL2_ChIP_Seq.SRR941118_trimmed_sorted_duprm_rmChrM_rmBlack.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/MLL2_ChIP_Seq.SRR941119_trimmed_sorted_duprm_rmChrM_rmBlack.bam -c /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/MLL2_Input_ChIP_Seq.SRR941120_trimmed_sorted_duprm_rmChrM_rmBlack.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/MLL2_Input_ChIP_Seq.SRR941121_trimmed_sorted_duprm_rmChrM_rmBlack.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/MLL2_Input_ChIP_Seq.SRR941122_trimmed_sorted_duprm_rmChrM_rmBlack.bam -f BAM -g mm -n MLL2 -B -q 0.05 
