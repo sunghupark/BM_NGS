@@ -1,4 +1,4 @@
-###trim galore 실행 예시 : .fastq.gz가 있는 디렉토리에서 실행. 꽤 오래걸림.
+###trim galore 실행 예시 : .fastq.gz가 있는 디렉토리에서 실행. 꽤 오래걸림. 
 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/TrimGalore-0.6.10/trim_galore -j 4 -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/ --fastqc_arg "-4 --outdir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/Fastqc/" MLL2_ChIP-seq.SRR941118.fastq.gz
 
 #index file의 basename이란(-x 뒤에 넣어주는 위치)
