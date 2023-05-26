@@ -87,7 +87,11 @@ bedtools intersect -a DROSHA_summits.bed \
 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/bedGraphToBigWig /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/MLL2_treat_pileup.bdg /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/chromsizes/mm9.chrom.sizes /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/MLL2_treat_pileup.bw ; \
 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/bedGraphToBigWig /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/MLL2_control_lambda.bdg /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/chromsizes/mm9.chrom.sizes /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/MLL2_control_lambda.bw
 
-
+###[Homer - motif analysis] 하나당 30분 이상. 052523 연구노트 참조.
+#MLL2<-directory 설정을 잘못함.
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/HOMER/bin/findMotifsGenome.pl /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/MLL2_summits.bed mm9 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_col
+#Drosha
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/HOMER/bin/findMotifsGenome.pl /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/MLL2_summits.bed mm9 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/homermotifresult/mll2_homermotifresult
 
 
 
