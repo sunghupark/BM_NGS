@@ -1,4 +1,4 @@
-###[trimming] -> 다음에는 파일명에 ChIP-Seq 대신 ChIP_Seq으로 쓸 것. -> 파일명은 심플할 수록 좋은듯
+###[trimming] -> 다음에는 파일명에 ChIP-Seq 대신 ChIP_Seq으로 쓸 것. -> 파일명은 심플할 수록 좋은듯 
 (venv) (base) bm@BM:/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/rawdata$
 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/TrimGalore-0.6.10/trim_galore -j 4 -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/ --fastqc_arg "-4 --outdir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/Fastqc/" Drosha_ChIP-seq.SRR5017445.fastq.gz ;
 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/TrimGalore-0.6.10/trim_galore -j 4 -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/ --fastqc_arg "-4 --outdir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/Fastqc/" Drosha_Input_ChIP-seq.SRR5017448.fastq.gz ; 
