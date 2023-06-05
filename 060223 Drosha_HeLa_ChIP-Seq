@@ -11,7 +11,7 @@ scp -P 2117 ~/Downloads/D_I.fastq.gz bm@143.248.15.5:/media/bm/790240e4-2887-451
 bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/GRCh38_noalt_as/GRCh38_noalt_as -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/D_C_trimmed.fq.gz -S D_C_trimmed.sam ; bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/GRCh38_noalt_as/GRCh38_noalt_as -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/D_I_trimmed.fq.gz -S D_I_trimmed.sam ; 
 --------------------------
 ###[samtools view]
-samtools view -@ 2 -S -bh -q 10 -F 1804 - D_C_trimmed.sam D_C_trimmed.bam ;
+samtools view -@ 2 -S -bh -q 10 -F 1804 - D_C_trimmed.sam D_C_trimmed.bam
 samtools view -@ 2 -S -bh -q 10 -F 1804 - D_I_trimmed.sam D_I_trimmed.bam
 
 ###[samtools sort]
