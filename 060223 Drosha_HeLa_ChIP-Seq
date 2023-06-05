@@ -19,7 +19,7 @@ samtools view -@ 2 -S -bh -q 10 -F 1804 - D_I_trimmed.sam D_I_trimmed.bam
 samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/D_C_trimmed_sorted.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/D_C_trimmed.bam ;
 samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/D_I_trimmed_sorted.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/D_I_trimmed.bam
 
----> 위에 3개를 한꺼번에 돌림. -> 정지화면이 굉장히 오래 유지됌.
+---> 위에 3개를 한꺼번에 돌림. -> bowtie 1개당 1시간 정도.
 bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/GRCh38_noalt_as/GRCh38_noalt_as -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/D_C_trimmed.fq.gz -S D_C_trimmed.sam ; bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/GRCh38_noalt_as/GRCh38_noalt_as -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/D_I_trimmed.fq.gz -S D_I_trimmed.sam ; samtools view -@ 2 -S -bh -q 10 -F 1804 - D_C_trimmed.sam D_C_trimmed.bam ; samtools view -@ 2 -S -bh -q 10 -F 1804 - D_I_trimmed.sam D_I_trimmed.bam ; samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/D_C_trimmed_sorted.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/D_C_trimmed.bam ; samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/D_I_trimmed_sorted.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/D_I_trimmed.bam
 
 ###[picard]
