@@ -20,6 +20,7 @@ bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/
 bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/MLL2_Input_ChIP-seq.SRR941122_trimmed.fq.gz -S MLL2_Input_ChIP-seq.SRR941122_trimmed.sam
 
 ###[samtools view]->samtools가 chip-seq에서 -을 못알아먹어서 언더바로 바꿈. : "rename 's/ChIP-seq/ChIP_Seq/' /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/*ChIP-seq*" 사용함.
+-> 060223 > 추가하는 것으로 수정함(fail to read header라고 떴었음).
 samtools view -@ 2 -S -bh -q 10 -F 1804 - Drosha_ChIP_seq.SRR5017445_trimmed.sam Drosha_ChIP_seq.SRR5017445_trimmed.bam ;
 samtools view -@ 2 -S -bh -q 10 -F 1804 - Drosha_Input_ChIP_seq.SRR5017448_trimmed.sam Drosha_Input_ChIP_seq.SRR5017448_trimmed.bam ;
 samtools view -@ 2 -S -bh -q 10 -F 1804 - MLL2_ChIP_seq.SRR941117_trimmed.sam MLL2_ChIP_seq.SRR941117_trimmed.bam ;
