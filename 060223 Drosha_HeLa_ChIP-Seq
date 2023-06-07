@@ -32,12 +32,18 @@ rm /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/
 -------------
 -> macs3 쓰기 전 가상환경 켜야함.
 ###[macs3] -> 그냥 바로 넣음 duprm 파일에서. -B : BedGraph가 .bdg로 나옴.
-macs3 callpeak -t /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/D_C_trimmed.duprm_rmChrM_rmBlack.bam -c /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/D_I_trimmed.duprm_rmChrM_rmBlack.bam -f BAM -g hs -n DROSHA_HeLa -B -q 0.05
+macs3 callpeak -t /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/D_C_trimmed.duprm_rmChrM_rmBlack.bam -c /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/D_I_trimmed.duprm_rmChrM_rmBlack.bam -f BAM -g mm -n D_H -B -q 0.05 --nomodel --extsize 200
+-> 그냥 돌리면 Drosha peak이 0개 떠서 뒤에 옵션 "--nomodel --extsize 200" 추가해봄 뜻은 잘 모르고 사이트에서 찾아서 함.
+-> Build Peak Model...
+INFO  @ Mon, 05 Jun 2023 22:11:40: #2 Skipped...
+INFO  @ Mon, 05 Jun 2023 22:11:40: #2 Use 200 as fragment length
+INFO  @ Mon, 05 Jun 2023 22:11:40: #3 Call peaks...
+INFO  @ Mon, 05 Jun 2023 22:11:40: #3 Pre-compute pvalue-qvalue table... 이런 메시지가 뜨더라.
 
 -> wget --timestamping 'ftp://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/hg38.chrom.sizes' -O hg38.chrom.sizes 를 다운 받아야함(ucsc 페이지 들어가면 다운 받는 법 나옴)
 ###[bedGraphToBigWig] -> bdg는 파일이 macs3에서 두개가 나오는데 그냥 각각 bigwig으로 바꾸고, intersect 볼때는 treat만 보면 될 것 같다. mll2_drosha_colocal/chromsizes/hg38.chrom.sizes 만들기
-/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/bedGraphToBigWig /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/DROSHA_HeLa_treat_pileup.bdg /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/chromsizes/hg38.chrom.sizes /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/DROSHA_HeLa_treat_pileup.bw ; \
-/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/bedGraphToBigWig /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/DROSHA_HeLa_control_lambda.bdg /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/chromsizes/hg38.chrom.sizes /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/DROSHA_HeLa_control_lambda.bw
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/bedGraphToBigWig /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/D_H_treat_pileup.bdg /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/chromsizes/hg38.chrom.sizes /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/D_H_treat_pileup.bw ; \
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/bedGraphToBigWig /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/D_H_control_lambda.bdg /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/chromsizes/hg38.chrom.sizes /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/D_H_control_lambda.bw
 
 ###[Homer - motif analysis] 하나당 30분 이상. 052523 연구노트 참조. -> DROSHA_HeLa_homermotifresult 디렉토리 만들어주기
-/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/HOMER/bin/findMotifsGenome.pl /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/DROSHA_HeLa_summits.hg38 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/homermotifresult/DROSHA_HeLa_homermotifresult
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/HOMER/bin/findMotifsGenome.pl /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/DROSHA_HeLa_summits.bed hg38 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/homermotifresult/DROSHA_HeLa_homermotifresult
