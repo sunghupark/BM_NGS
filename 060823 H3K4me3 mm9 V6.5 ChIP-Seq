@@ -1,0 +1,79 @@
+#Mll2 branch of the COMPASS family regulates bivalent promoters in mouse embryonic stem cells
+#H3K4me3. Mus musculus(V6.5 embryonic stem cells)(Illumina HiSeq 2000, 3 bio rep.) → tech rep은 2개임. 그런데 1개만 돌림.
+#SRR9158/63/64/65 : H3_C_1/2/3 으로 이름 바꿈. <- IP samples.
+#SRR9158/66/67/68 : H3_I_1/2/3 으로 이름 바꿈. <- Input samples.
+
+###[trimming] -> fail to gc sequence 뭐시기 나오는데 proceed 가능. 하나씩 돌려야 함. 아니면 no such file... 이라 나옴.
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/TrimGalore-0.6.10/trim_galore -j 4 -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/ --fastqc_arg "-4 --outdir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/Fastqc/" H3_I_1.fastq.gz
+
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/TrimGalore-0.6.10/trim_galore -j 4 -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/ --fastqc_arg "-4 --outdir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/Fastqc/" H3_I_2.fastq.gz
+
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/TrimGalore-0.6.10/trim_galore -j 4 -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/ --fastqc_arg "-4 --outdir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/Fastqc/" H3_I_3.fastq.gz
+
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/TrimGalore-0.6.10/trim_galore -j 4 -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/ --fastqc_arg "-4 --outdir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/Fastqc/" H3_C_1.fastq.gz
+
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/TrimGalore-0.6.10/trim_galore -j 4 -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/ --fastqc_arg "-4 --outdir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/Fastqc/" H3_C_2.fastq.gz
+
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/TrimGalore-0.6.10/trim_galore -j 4 -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/ --fastqc_arg "-4 --outdir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/Fastqc/" H3_C_3.fastq.gz 
+
+###[bowtie2]아무 디렉토리에서. 하나당 30분 정도 걸림.
+bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/H3_I_1_trimmed.fq.gz -S H3_I_1_trimmed.sam ; bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/H3_I_2_trimmed.fq.gz -S H3_I_2_trimmed.sam ; bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/H3_I_3_trimmed.fq.gz -S H3_I_3_trimmed.sam ; bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/H3_C_1_trimmed.fq.gz -S H3_C_1_trimmed.sam ; bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/H3_C_2_trimmed.fq.gz -S H3_C_2_trimmed.sam ; bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/indexes/mm9/mm9 -X 1000 -U /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/H3_C_3_trimmed.fq.gz -S H3_C_3_trimmed.sam
+
+---------------------------------
+
+###[samtools view] -> 1분이면 된다
+samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_I_1_trimmed.sam H3_I_1_trimmed.bam ; 
+samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_I_2_trimmed.sam H3_I_2_trimmed.bam ; 
+samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_I_3_trimmed.sam H3_I_3_trimmed.bam ; 
+samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_C_1_trimmed.sam H3_C_1_trimmed.bam ; 
+samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_C_2_trimmed.sam H3_C_2_trimmed.bam ; 
+samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_C_3_trimmed.sam H3_C_3_trimmed.bam
+
+###[samtools sort]
+samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/H3_I_1_trimmed_sorted.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/H3_I_1_trimmed.bam ;
+samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/H3_I_2_trimmed_sorted.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/H3_I_2_trimmed.bam ;
+samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/H3_I_3_trimmed_sorted.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/H3_I_3_trimmed.bam ;
+samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/H3_C_1_trimmed_sorted.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/H3_C_1_trimmed.bam ;
+samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/H3_C_2_trimmed_sorted.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/H3_C_2_trimmed.bam ;
+samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/H3_C_3_trimmed_sorted.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/H3_C_3_trimmed.bam ;
+
+###[picard] -> -o에 'sorted' 달아줬는지 확인하기.
+java -jar /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/picard.jar MarkDuplicates I=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/H3_I_1_trimmed_sorted.bam O=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_1_trimmed_sorted_duprm.bam M=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_1_trimmed_sorted_marked_dup_metrics.txt ;
+java -jar /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/picard.jar MarkDuplicates I=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/H3_I_2_trimmed_sorted.bam O=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_2_trimmed_sorted_duprm.bam M=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_2_trimmed_sorted_marked_dup_metrics.txt ;
+java -jar /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/picard.jar MarkDuplicates I=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/H3_I_3_trimmed_sorted.bam O=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_3_trimmed_sorted_duprm.bam M=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_3_trimmed_sorted_marked_dup_metrics.txt ;
+java -jar /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/picard.jar MarkDuplicates I=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/H3_C_1_trimmed_sorted.bam O=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_1_trimmed_sorted_duprm.bam M=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_1_trimmed_sorted_marked_dup_metrics.txt ;
+java -jar /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/picard.jar MarkDuplicates I=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/H3_C_2_trimmed_sorted.bam O=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_2_trimmed_sorted_duprm.bam M=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_2_trimmed_sorted_marked_dup_metrics.txt ;
+java -jar /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/picard.jar MarkDuplicates I=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/H3_C_3_trimmed_sorted.bam O=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_3_trimmed_sorted_duprm.bam M=/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_3_trimmed_sorted_marked_dup_metrics.txt ;
+
+### mm9-blacklist.bed.gz OR hg38-blacklist.v2.bed.gz
+samtools view -h -@ 2 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_1_trimmed_sorted_duprm.bam | egrep -v chrM | samtools view -bh -@ 2 - | bedtools intersect -abam stdin -b /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/blacklist/mm9-blacklist.bed.gz -v > /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_1_trimmed_sorted_duprm_rmChrM_rmBlack.bam ;
+
+samtools view -h -@ 2 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_2_trimmed_sorted_duprm.bam | egrep -v chrM | samtools view -bh -@ 2 - | bedtools intersect -abam stdin -b /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/blacklist/mm9-blacklist.bed.gz -v > /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_2_trimmed_sorted_duprm_rmChrM_rmBlack.bam ;
+
+samtools view -h -@ 2 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_3_trimmed_sorted_duprm.bam | egrep -v chrM | samtools view -bh -@ 2 - | bedtools intersect -abam stdin -b /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/blacklist/mm9-blacklist.bed.gz -v > /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_3_trimmed_sorted_duprm_rmChrM_rmBlack.bam ;
+
+samtools view -h -@ 2 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_1_trimmed_sorted_duprm.bam | egrep -v chrM | samtools view -bh -@ 2 - | bedtools intersect -abam stdin -b /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/blacklist/mm9-blacklist.bed.gz -v > /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_1_trimmed_sorted_duprm_rmChrM_rmBlack.bam ;
+
+samtools view -h -@ 2 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_2_trimmed_sorted_duprm.bam | egrep -v chrM | samtools view -bh -@ 2 - | bedtools intersect -abam stdin -b /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/blacklist/mm9-blacklist.bed.gz -v > /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_2_trimmed_sorted_duprm_rmChrM_rmBlack.bam ;
+
+samtools view -h -@ 2 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_3_trimmed_sorted_duprm.bam | egrep -v chrM | samtools view -bh -@ 2 - | bedtools intersect -abam stdin -b /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/blacklist/mm9-blacklist.bed.gz -v > /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_3_trimmed_sorted_duprm_rmChrM_rmBlack.bam
+
+rm /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_1_trimmed_sorted_duprm.bam ;
+rm /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_2_trimmed_sorted_duprm.bam
+;
+rm /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_3_trimmed_sorted_duprm.bam
+;
+rm /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_1_trimmed_sorted_duprm.bam ;
+rm /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_2_trimmed_sorted_duprm.bam
+;
+rm /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_3_trimmed_sorted_duprm.bam
+
+###[macs3] -> 가상환경 켜야함, bio rep 3개가 이 시점에서 합쳐짐(052223 참고함). 만약 cat에서 peak 0개 뜨면 0.05 뒤에 "--nomodel --extsize 200" 추가해보기.
+macs3 callpeak -t /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_1_trimmed_sorted_duprm_rmChrM_rmBlack.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_2_trimmed_sorted_duprm_rmChrM_rmBlack.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_C_3_trimmed_sorted_duprm_rmChrM_rmBlack.bam -c /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_1_trimmed_sorted_duprm_rmChrM_rmBlack.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_2_trimmed_sorted_duprm_rmChrM_rmBlack.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3_I_3_trimmed_sorted_duprm_rmChrM_rmBlack.bam -f BAM -g mm -n H3K4me3 -B -q 0.05 ; cat H3K4me3_summits.bed | wc -l
+
+###[bedGraphToBigWig]
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/bedGraphToBigWig /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3K4me3_treat_pileup.bdg /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/chromsizes/mm9.chrom.sizes /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3K4me3_treat_pileup.bw ; \
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/bedGraphToBigWig /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3K4me3_control_lambda.bdg /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/chromsizes/mm9.chrom.sizes /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3K4me3_control_lambda.bw
+
+###[Homer - motif analysis] -> H3K4me3_homermotifresult 디렉토리 안 만들어줘도 되는 듯? 하나당 30분 이상. 052523 연구노트 참조.
+/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/HOMER/bin/findMotifsGenome.pl /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/H3K4me3_summits.bed mm9 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/homermotifresult/H3K4me3_homermotifresult
