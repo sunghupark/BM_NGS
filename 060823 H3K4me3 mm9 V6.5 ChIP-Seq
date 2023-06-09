@@ -21,13 +21,13 @@ bowtie2 -p 2 --very-sensitive -x /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/
 
 ---------------------------------
 
-###[samtools view] -> 누가 1분이래 오래걸림, 까딱하면 [main_samview] fail to read the header from "-". 나오는데 다시해보면 되더라(060823)
-samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_I_1_trimmed.sam H3_I_1_trimmed.bam ; 
-samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_I_2_trimmed.sam H3_I_2_trimmed.bam ; 
-samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_I_3_trimmed.sam H3_I_3_trimmed.bam ; 
-samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_C_1_trimmed.sam H3_C_1_trimmed.bam ; 
-samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_C_2_trimmed.sam H3_C_2_trimmed.bam ; 
-samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_C_3_trimmed.sam H3_C_3_trimmed.bam
+###[samtools view] -> 1분 정도, 까딱하면 [main_samview] fail to read the header from "-". 나오는데 다시해보면 되더라(060823), 다시해도 안되면 bash코드로 해봐라(060923).
+samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_I_1_trimmed.sam > H3_I_1_trimmed.bam ; 
+samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_I_2_trimmed.sam > H3_I_2_trimmed.bam ; 
+samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_I_3_trimmed.sam > H3_I_3_trimmed.bam ; 
+samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_C_1_trimmed.sam > H3_C_1_trimmed.bam ; 
+samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_C_2_trimmed.sam > H3_C_2_trimmed.bam ; 
+samtools view -@ 2 -S -bh -q 10 -F 1804 - H3_C_3_trimmed.sam > H3_C_3_trimmed.bam
 
 ###[samtools sort]
 samtools sort -@ 2 -m 24G -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/aligned/H3_I_1_trimmed_sorted.bam /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/H3_I_1_trimmed.bam ;
