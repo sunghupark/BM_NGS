@@ -13,5 +13,8 @@ computeMatrix scale-regions \
 ***[computeMatrix reference-point] input이 한개일때? "--transcriptID transcript" 없어도 일단 잘 돌아가는 듯(061123) 하나당 20분 정도.
 computeMatrix reference-point --referencePoint TSS --transcriptID transcript -S MLL2/MLL2_treat_pileup.bw -R /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/GTF/mm9.refGene.gtf -a 3000 -b 3000 -o MLL2.mat.gz
 
+***[colocal 보기]
+computeMatrix reference-point --referencePoint center --transcriptID transcript -S DROSHA/DROSHA_treat_pileup.bw -R MLL2/MLL2_summits.bed -a 3000 -b 3000 -o mll2_drosha_colocal.mat.gz
+
 ***[plotHeatmap] *input file이 gz 압축 파일이다. png 파일은 scp로 받아서 열자. 금방됌. computeMatrix만 하고 나면 이건 딱히 고민안하고 돌리면 됌.
 plotHeatmap -m mat.mat.gz -o MLL2.TSS.png
