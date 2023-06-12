@@ -1,20 +1,21 @@
 *gtf 파일은 ucsc에서 3개가 검색 가능한데, 이중 gene name이 담긴 refGene 파일을 사용한다.
 
-***[computeMatrix scale-regions] input이 여러개일때? 아래 코드에 추가로 "--transcriptID transcript" 넣고 돌려봄(061123) 20분 * input 개수
+***[computeMatrix scale-regions] 20분 * input 개수
 computeMatrix scale-regions \ 
 -S DROSHA/DROSHA_treat_pileup.bw MLL2/MLL2_treat_pileup.bw DGCR8/DGCR8_treat_pileup.bw H3K4me3/H3K4me3_treat_pileup.bw \
 -R /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/GTF/mm9.refGene.gtf \
 -o mat.mat.gz \
+--transcriptID transcript
 --beforeRegionStartLength 3000 \
 --regionBodyLength 5000 \
 --afterRegionStartLength 3000 \
 --skipZeros
 
-***[computeMatrix reference-point] input이 한개일때? "--transcriptID transcript" 없어도 일단 잘 돌아가는 듯(061123) 하나당 20분 정도.
-computeMatrix reference-point --referencePoint TSS --transcriptID transcript -S MLL2/MLL2_treat_pileup.bw -R /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/GTF/mm9.refGene.gtf -a 3000 -b 3000 -o MLL2.mat.gz
+***[computeMatrix reference-point] "--transcriptID transcript" 옵션 넣기. 하나당 20분 정도.
+computeMatrix reference-point --referencePoint TSS -S MLL2/MLL2_treat_pileup.bw -R /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/GTF/mm9.refGene.gtf -a 3000 -b 3000 -o MLL2.mat.gz
 
-***[colocal 보기]
-computeMatrix reference-point --referencePoint center --transcriptID transcript -S DROSHA/DROSHA_treat_pileup.bw -R MLL2/MLL2_summits.bed -a 3000 -b 3000 -o mll2_drosha_colocal.mat.gz
+***[colocal 보기] GTF가 아닌 bed가 input일 때는 --transcriptID transcript 넣어도 안 먹음. 그래도 둘다 돌려봐라(HM 061223). 
+computeMatrix reference-point --referencePoint center -S DROSHA/DROSHA_treat_pileup.bw -R MLL2/MLL2_summits.bed -a 3000 -b 3000 -o mll2_drosha_colocal.mat.gz
 
 ***[plotHeatmap] *input file이 gz 압축 파일이다. png 파일은 scp로 받아서 열자. 금방됌. computeMatrix만 하고 나면 이건 딱히 고민안하고 돌리면 됌.
 plotHeatmap -m mat.mat.gz -o MLL2.TSS.png
