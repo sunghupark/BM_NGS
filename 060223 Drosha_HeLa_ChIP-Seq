@@ -2,7 +2,7 @@
 scp -P 2117 ~/Downloads/D_C.fastq.gz bm@143.248.15.5:/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/ ; 
 scp -P 2117 ~/Downloads/D_I.fastq.gz bm@143.248.15.5:/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/
 
-###[trimming] 
+###[trimming] -> fail to gc sequence 뭐시기 나오는데 proceed 가능. 하나씩 안돌리면 re-0.6.10/trim_galore: No such file or directory라고 뜸 ㅋㅋ 엌 ㅋㅋㅋ
 (venv) (base) bm@BM:/media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/rawdata$
 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/TrimGalore-0.6.10/trim_galore -j 4 -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/ --fastqc_arg "-4 --outdir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/Fastqc/" D_C.fastq.gz ;
 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/TrimGalore-0.6.10/trim_galore -j 4 -o /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/ --fastqc_arg "-4 --outdir /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/trimmed/Fastqc/" D_I.fastq.gz 
@@ -49,5 +49,5 @@ cat D_H_summits.bed | wc -l
 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/bedGraphToBigWig /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/D_H_treat_pileup.bdg /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/chromsizes/hg38.chrom.sizes /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/D_H_treat_pileup.bw ; \
 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/bedGraphToBigWig /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/D_H_control_lambda.bdg /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/chromsizes/hg38.chrom.sizes /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/D_H_control_lambda.bw
 
-###[Homer - motif analysis] 하나당 30분 이상. 052523 연구노트 참조. -> DROSHA_HeLa_homermotifresult 디렉토리 만들어주기
+###[Homer - motif analysis] 경로설정을 먼저해야한다. 052523 연구노트 참조. 하나당 30분 이상. -> DROSHA_HeLa_homermotifresult 디렉토리 만들어주기
 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/Tools/HOMER/bin/findMotifsGenome.pl /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/duprm/DROSHA_HeLa_summits.bed hg38 /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/homermotifresult/DROSHA_HeLa_homermotifresult
