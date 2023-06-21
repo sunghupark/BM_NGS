@@ -17,5 +17,10 @@ computeMatrix reference-point --referencePoint TSS -S MLL2/MLL2_treat_pileup.bw 
 ***[colocal 보기] GTF가 아닌 bed가 input일 때는 --transcriptID transcript 넣어도 안 먹음. 그래도 둘다 돌려봐라(HM 061223). 
 computeMatrix reference-point --referencePoint center -S DROSHA/DROSHA_treat_pileup.bw -R MLL2/MLL2_summits.bed -a 3000 -b 3000 -o mll2_drosha_colocal.mat.gz
 
+(062123 mirgenedb2.1에서 받은 mouse miRNA locus bed file을 레퍼로 Drosha, MLL2 돌려봄) -> duprm에서 돌리기.
+computeMatrix reference-point --referencePoint center -S DROSHA/DROSHA_treat_pileup.bw -R /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/mirnacoordinates/mmu_mouse_genomic_coordinates_mirgenedb2.1.bed -a 3000 -b 3000 -o miRNA_centered_DROSHA.mat.gz ; computeMatrix reference-point --referencePoint center -S MLL2/MLL2_treat_pileup.bw -R /media/bm/790240e4-2887-451f-ad02-1b19c4b4e120/PSH/mll2_drosha_colocal/mirnacoordinates/mmu_mouse_genomic_coordinates_mirgenedb2.1.bed -a 3000 -b 3000 -o miRNA_centered_MLL2.mat.gz
+plotHeatmap -m miRNA_centered_MLL2.mat.gz -o miRNA_centered_MLL2.png
+plotHeatmap -m miRNA_centered_DROSHA.mat.gz -o miRNA_centered_DROSHA.png
+
 ***[plotHeatmap] *input file이 gz 압축 파일이다. png 파일은 scp로 받아서 열자. 금방됌. computeMatrix만 하고 나면 이건 딱히 고민안하고 돌리면 됌.
 plotHeatmap -m mat.mat.gz -o MLL2.TSS.png
