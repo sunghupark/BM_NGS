@@ -1,0 +1,26 @@
+[global chromatin localization piechart]
+library(ChIPseeker)
+library(TxDb.Mmusculus.UCSC.mm9.knownGene)
+txdb <- TxDb.Mmusculus.UCSC.mm9.knownGene
+bed_file <- "/Users/sunghupark/Library/CloudStorage/OneDrive-kaist.ac.kr/BM/ChIP-Seq/mll2_drosha_colocal/___MLL2_from_ali_paper/MLL2_summits.bed"
+peakAnno <- annotatePeak(bed_file, tssRegion=c(-3000, 3000),
++                          TxDb=txdb, annoDb="org.Hs.eg.db")
+View(peakAnno)
+
+[+a(for trouble shooting)]
+library("CEMiTool")
+
+library(TxDb.Hsapiens.UCSC.hg19.knownGene)
+txdb <- TxDb.Hsapiens.UCSC.hg19.knownGene
+bed_file_set <- "/Users/sunghupark/Downloads/GSM4819856_S05_SET1BNormoxiaChIP_1_peaks.bed"
+peakAnno <- annotatePeak(bed_file_set, tssRegion=c(-3000, 3000), TxDb=txdb, annoDb="org.Hs.eg.db")
+>> loading peak file...				 2023-06-20 22:09:48 
+>> preparing features information...		 2023-06-20 22:09:50 
+>> identifying nearest features...		 2023-06-20 22:09:50 
+>> calculating distance from peak to TSS...	 2023-06-20 22:09:50 
+>> assigning genomic annotation...		 2023-06-20 22:09:50 
+>> adding gene annotation...			 2023-06-20 22:09:57 
+'select()' returned 1:many mapping between keys and columns
+>> assigning chromosome lengths			 2023-06-20 22:09:57 
+>> done...					 2023-06-20 22:09:57 
+plotAnnoPie(peakAnno)
